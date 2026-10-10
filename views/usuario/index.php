@@ -20,7 +20,12 @@
                         <h2><?php echo $pelicula['titulo']; ?></h2>
                         <p><?php echo truncarTexto($pelicula['descripcion'], 150); ?></p>
                         <span class="anio"><?php echo $pelicula['anio_estreno']; ?></span>
-                        <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" class="btn-reservar">Reservar</a>
+                        <div class="pelicula-botones">
+                            <a href="<?php echo BASE_URL; ?>?ruta=detalle&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                            class="btn-detalle">Ver detalle</a>
+                            <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                            class="btn-reservar">Reservar</a>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -52,7 +57,12 @@
                 <div class="info-pelicula">
                     <h3><?php echo $pelicula['titulo']; ?></h3>
                     <p><?php echo truncarTexto($pelicula['descripcion'], 100); ?></p>
-                    <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" class="btn-reservar">Reservar</a>
+                    <div class="pelicula-botones">
+                        <a href="<?php echo BASE_URL; ?>?ruta=detalle&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                        class="btn-detalle">Ver detalle</a>
+                        <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                        class="btn-reservar">Reservar</a>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
