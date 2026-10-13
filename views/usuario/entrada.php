@@ -8,14 +8,14 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 </head>
 <body>
-	<?php require_once __DIR__ . '/../shared/navbar.php'; ?>
+    <?php require_once __DIR__ . '/../shared/navbar.php'; ?>
 
     <div class="entrada-container">
         <h1>Seleccionar Butacas</h1>
-        <h2><?php echo htmlspecialchars($funcion['pelicula_titulo']); ?></h2>
+        <h2><?php echo e($funcion['pelicula_titulo']); ?></h2>
         <p><strong>Fecha:</strong> <?php echo formatearFecha($funcion['fecha'], 'd/m/Y'); ?></p>
         <p><strong>Hora:</strong> <?php echo substr($funcion['horario'], 0, 5); ?></p>
-        <p><strong>Sala:</strong> <?php echo htmlspecialchars($funcion['sala_nombre']); ?></p>
+        <p><strong>Sala:</strong> <?php echo e($funcion['sala_nombre']); ?></p>
         <p><strong>Precio:</strong> $<?php echo number_format($funcion['precio'], 2); ?></p>
 
         <?php if (isset($mensaje)): ?>
@@ -24,7 +24,6 @@
             </div>
         <?php endif; ?>
 
-        <!-- Leyenda -->
         <div class="leyenda-butacas">
             <span class="leyenda-item"><span class="butaca-color disponible"></span> Disponible</span>
             <span class="leyenda-item"><span class="butaca-color reservada"></span> Reservada</span>
@@ -32,10 +31,10 @@
             <span class="leyenda-item"><span class="butaca-color seleccionada"></span> Tu selección</span>
         </div>
 
-        <!-- Pantalla -->
         <div class="pantalla">PANTALLA</div>
 
         <form action="<?php echo BASE_URL; ?>?ruta=procesar_compra" method="POST" id="form-compra">
+            <?php echo csrf_field(); ?>
             <input type="hidden" name="id_funcion" value="<?php echo $funcion['id_funcion']; ?>">
 
             <div class="butacas-grid">
@@ -51,7 +50,7 @@
                                class="butaca-checkbox"
                                <?php echo $disabled; ?>>
                         <span class="butaca-num">
-                            <?php echo htmlspecialchars($butaca['numero_butaca']); ?>
+                            <?php echo e($butaca['numero_butaca']); ?>
                         </span>
                     </label>
                 <?php endforeach; ?>

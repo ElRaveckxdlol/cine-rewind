@@ -20,6 +20,7 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=login_post" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" required placeholder="tú@ejemplo.com" autofocus>

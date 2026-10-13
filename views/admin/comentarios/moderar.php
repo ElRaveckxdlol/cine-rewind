@@ -7,7 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 </head>
 <body>
-	<?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
+    <?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
 
     <div class="admin-section">
         <h1>Moderar Comentarios</h1>
@@ -47,10 +47,10 @@
                 <tbody>
                     <?php foreach ($comentarios as $c): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($c['usuario_nombre']); ?></td>
-                            <td><?php echo htmlspecialchars($c['pelicula_titulo']); ?></td>
+                            <td><?php echo e($c['usuario_nombre']); ?></td>
+                            <td><?php echo e($c['pelicula_titulo']); ?></td>
                             <td><?php echo str_repeat('⭐', $c['puntaje']); ?></td>
-                            <td><?php echo htmlspecialchars(truncarTexto($c['comentario'], 80)); ?></td>
+                            <td><?php echo e(truncarTexto($c['comentario'], 80)); ?></td>
                             <td><span class="badge badge-<?php echo $c['estado']; ?>">
                                 <?php echo $c['estado']; ?>
                             </span></td>
@@ -58,17 +58,20 @@
                             <td>
                                 <?php if ($c['estado'] === 'pendiente'): ?>
                                     <form method="POST" style="display:inline;">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="id" value="<?php echo $c['id_comentario']; ?>">
                                         <input type="hidden" name="accion" value="aprobar">
                                         <button class="btn-approve">Aprobar</button>
                                     </form>
                                     <form method="POST" style="display:inline;">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="id" value="<?php echo $c['id_comentario']; ?>">
                                         <input type="hidden" name="accion" value="rechazar">
                                         <button class="btn-reject">Rechazar</button>
                                     </form>
                                 <?php endif; ?>
                                 <form method="POST" style="display:inline;">
+                                    <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id" value="<?php echo $c['id_comentario']; ?>">
                                     <input type="hidden" name="accion" value="eliminar">
                                     <button class="btn-delete" 

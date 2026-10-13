@@ -20,6 +20,7 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=registro_post" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="nombre">Nombre Completo</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>

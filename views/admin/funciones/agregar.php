@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
+
     <div class="admin-form">
         <h1> Agregar Función</h1>
 
@@ -19,13 +20,14 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=admin_funciones_agregar" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="id_pelicula">Película</label>
                 <select id="id_pelicula" name="id_pelicula" required>
                     <option value="">Seleccionar película</option>
                     <?php foreach ($peliculas as $pelicula): ?>
                         <option value="<?php echo $pelicula['id_pelicula']; ?>">
-                            <?php echo $pelicula['titulo']; ?>
+                            <?php echo e($pelicula['titulo']); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -37,7 +39,7 @@
                     <option value="">Seleccionar sala</option>
                     <?php foreach ($salas as $sala): ?>
                         <option value="<?php echo $sala['id_sala']; ?>">
-                            <?php echo $sala['nombre']; ?> (Cap: <?php echo $sala['capacidad']; ?>)
+                            <?php echo e($sala['nombre']); ?> (Cap: <?php echo $sala['capacidad']; ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>

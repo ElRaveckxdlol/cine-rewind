@@ -8,8 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 </head>
 <body>
-    	<?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
-    </header>
+    <?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
 
     <div class="admin-form">
         <h1> Editar Película</h1>
@@ -21,14 +20,15 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=admin_peliculas_editar&id=<?php echo $pelicula['id_pelicula']; ?>" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" value="<?php echo $pelicula['titulo']; ?>" required>
+                <input type="text" id="titulo" name="titulo" value="<?php echo e($pelicula['titulo']); ?>" required>
             </div>
 
             <div class="input-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="4" required><?php echo $pelicula['descripcion']; ?></textarea>
+                <textarea id="descripcion" name="descripcion" rows="4" required><?php echo e($pelicula['descripcion']); ?></textarea>
             </div>
 
             <div class="input-group">
@@ -38,7 +38,7 @@
 
             <div class="input-group">
                 <label for="genero">Género</label>
-                <input type="text" id="genero" name="genero" value="<?php echo $pelicula['genero']; ?>" required>
+                <input type="text" id="genero" name="genero" value="<?php echo e($pelicula['genero']); ?>" required>
             </div>
 
             <div class="input-group">
@@ -59,13 +59,13 @@
 
             <div class="input-group">
                 <label for="posterurl">Nombre del archivo de póster</label>
-                <input type="text" id="posterurl" name="posterurl" value="<?php echo $pelicula['posterurl']; ?>" required>
+                <input type="text" id="posterurl" name="posterurl" value="<?php echo e($pelicula['posterurl']); ?>" required>
                 <small>El archivo debe estar en public/imagenes/</small>
             </div>
 
             <div class="input-group">
                 <label for="trailerurl">URL del tráiler (opcional)</label>
-                <input type="text" id="trailerurl" name="trailerurl" value="<?php echo $pelicula['trailerurl']; ?>" placeholder="https://www.youtube.com/embed/...">
+                <input type="text" id="trailerurl" name="trailerurl" value="<?php echo e($pelicula['trailerurl']); ?>" placeholder="https://www.youtube.com/embed/...">
             </div>
 
             <div class="input-group checkbox">

@@ -20,12 +20,13 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=admin_funciones_editar&id=<?php echo $funcion['id_funcion']; ?>" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="id_pelicula">Película</label>
                 <select id="id_pelicula" name="id_pelicula" required>
                     <?php foreach ($peliculas as $pelicula): ?>
                         <option value="<?php echo $pelicula['id_pelicula']; ?>" <?php echo $pelicula['id_pelicula'] == $funcion['id_pelicula'] ? 'selected' : ''; ?>>
-                            <?php echo $pelicula['titulo']; ?>
+                            <?php echo e($pelicula['titulo']); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -36,7 +37,7 @@
                 <select id="id_sala" name="id_sala" required>
                     <?php foreach ($salas as $sala): ?>
                         <option value="<?php echo $sala['id_sala']; ?>" <?php echo $sala['id_sala'] == $funcion['id_sala'] ? 'selected' : ''; ?>>
-                            <?php echo $sala['nombre']; ?> (Cap: <?php echo $sala['capacidad']; ?>)
+                            <?php echo e($sala['nombre']); ?> (Cap: <?php echo $sala['capacidad']; ?>)
                         </option>
                     <?php endforeach; ?>
                 </select>

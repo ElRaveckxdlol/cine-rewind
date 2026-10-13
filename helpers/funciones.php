@@ -2,13 +2,21 @@
 // Funciones auxiliares
 
 /**
- * Sanitiza un string para prevenir XSS
+ * Sanitiza un string para prevenir XSS (al GUARDAR)
  */
 function sanitizar($dato) {
     $dato = trim($dato);
     $dato = stripslashes($dato);
     $dato = htmlspecialchars($dato, ENT_QUOTES, 'UTF-8');
     return $dato;
+}
+
+/**
+ * Escapa un string para mostrar en HTML (al MOSTRAR)
+ * Uso: <?php echo e($variable); ?>
+ */
+function e($str) {
+    return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
 }
 
 /**
@@ -30,6 +38,7 @@ function redirigir($url) {
     }
     exit();
 }
+
 /**
  * Muestra un mensaje flash en sesión
  */
@@ -104,5 +113,42 @@ function truncarTexto($texto, $longitud = 100) {
         return $texto;
     }
     return substr($texto, 0, $longitud) . '...';
+}
+
+/**
+ * CSRF - Genera o devuelve el token de la sesión
+ */
+function csrf_token() {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * CSRF - Campo oculto para formularios
+ * Uso: <?php echo csrf_field(); ?>
+ */
+function csrf_field() {
+    return '<input type="hidden" name="csrf_token" value="' . csrf_token() . '">';
+}
+
+/**
+ * CSRF - Verifica el token en POST
+ * Llamar al inicio del index.php o en cada controlador que reciba POST
+ */
+function csrf_verificar() {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        return true;
+    }
+
+    $enviado = $_POST['csrf_token'] ?? '';
+    $guardado = $_SESSION['csrf_token'] ?? '';
+
+    if (empty($guardado) || !hash_equals($guardado, $enviado)) {
+        http_response_code(403);
+        die('Token de seguridad inválido. Volvé atrás e intentá de nuevo.');
+    }
+    return true;
 }
 ?>

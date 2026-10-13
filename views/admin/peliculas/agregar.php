@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 </head>
 <body>
-    	<?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
+    <?php require_once __DIR__ . '/../../shared/navbar.php'; ?>
 
     <div class="admin-form">
         <h1> Agregar Película</h1>
@@ -20,6 +20,7 @@
         <?php endif; ?>
 
         <form action="<?php echo BASE_URL; ?>?ruta=admin_peliculas_agregar" method="POST">
+            <?php echo csrf_field(); ?>
             <div class="input-group">
                 <label for="titulo">Título</label>
                 <input type="text" id="titulo" name="titulo" required>

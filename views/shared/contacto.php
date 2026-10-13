@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 </head>
 <body>
-    <<?php require_once __DIR__ . '/navbar.php'; ?>
+    <?php require_once __DIR__ . '/navbar.php'; ?>
 
     <div class="contacto-container">
         <h1> ¡Contactate con nosotros!</h1>
