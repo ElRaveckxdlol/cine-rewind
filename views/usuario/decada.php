@@ -26,7 +26,12 @@
                         <img src="<?php echo BASE_URL; ?>imagenes/<?php echo $pelicula['posterurl']; ?>" alt="<?php echo $pelicula['titulo']; ?>">
                         <h3><?php echo $pelicula['titulo']; ?></h3>
                         <span><?php echo $pelicula['anio_estreno']; ?></span>
-                        <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" class="btn-reservar">Reservar</a>
+                        <div class="pelicula-botones">
+                            <a href="<?php echo BASE_URL; ?>?ruta=detalle&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                            class="btn-detalle">Ver detalle</a>
+                            <a href="<?php echo BASE_URL; ?>?ruta=reservar&id=<?php echo $pelicula['id_pelicula']; ?>" 
+                            class="btn-reservar">Reservar</a>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
