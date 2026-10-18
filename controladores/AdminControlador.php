@@ -29,10 +29,8 @@ class AdminControlador {
     
     public function listarPeliculas() {
         AuthControlador::verificarAdmin();
-        
         $peliculas = PeliculaModelo::obtenerTodas();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/peliculas/listar.php';
     }
     
@@ -60,13 +58,8 @@ class AdminControlador {
             }
             
             $resultado = PeliculaModelo::crear($datos);
-            
-            if ($resultado) {
-                setMensaje('success', 'Película agregada correctamente.');
-            } else {
-                setMensaje('error', 'Error al agregar la película.');
-            }
-            
+            setMensaje($resultado ? 'success' : 'error', 
+                       $resultado ? 'Película agregada correctamente.' : 'Error al agregar.');
             redirigir('admin_peliculas');
         }
         
@@ -77,10 +70,9 @@ class AdminControlador {
     public function editarPelicula() {
         AuthControlador::verificarAdmin();
         
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de película no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_peliculas');
         }
         
@@ -111,13 +103,8 @@ class AdminControlador {
             }
             
             $resultado = PeliculaModelo::actualizar($id, $datos);
-            
-            if ($resultado) {
-                setMensaje('success', 'Película actualizada correctamente.');
-            } else {
-                setMensaje('error', 'Error al actualizar la película.');
-            }
-            
+            setMensaje($resultado ? 'success' : 'error', 
+                       $resultado ? 'Película actualizada.' : 'Error al actualizar.');
             redirigir('admin_peliculas');
         }
         
@@ -127,22 +114,14 @@ class AdminControlador {
     
     public function eliminarPelicula() {
         AuthControlador::verificarAdmin();
-        
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de película no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_peliculas');
         }
-        
         $resultado = PeliculaModelo::eliminar($id);
-        
-        if ($resultado) {
-            setMensaje('success', 'Película eliminada correctamente.');
-        } else {
-            setMensaje('error', 'Error al eliminar la película.');
-        }
-        
+        setMensaje($resultado ? 'success' : 'error', 
+                   $resultado ? 'Película eliminada.' : 'Error al eliminar.');
         redirigir('admin_peliculas');
     }
     
@@ -150,10 +129,8 @@ class AdminControlador {
     
     public function listarFunciones() {
         AuthControlador::verificarAdmin();
-        
         $funciones = FuncionModelo::obtenerTodas();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/funciones/listar.php';
     }
     
@@ -178,33 +155,26 @@ class AdminControlador {
             
             try {
                 $resultado = FuncionModelo::crear($datos);
-                
-                if ($resultado) {
-                    setMensaje('success', 'Función agregada correctamente con sus butacas.');
-                } else {
-                    setMensaje('error', 'Error al agregar la función.');
-                }
+                setMensaje($resultado ? 'success' : 'error', 
+                           $resultado ? 'Función agregada con sus butacas.' : 'Error al agregar.');
             } catch (Exception $e) {
                 setMensaje('error', $e->getMessage());
             }
-            
             redirigir('admin_funciones');
         }
         
         $peliculas = PeliculaModelo::obtenerTodas();
         $salas = SalaModelo::obtenerTodas();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/funciones/agregar.php';
     }
     
     public function editarFuncion() {
         AuthControlador::verificarAdmin();
         
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de función no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_funciones');
         }
         
@@ -231,41 +201,27 @@ class AdminControlador {
             }
             
             $resultado = FuncionModelo::actualizar($id, $datos);
-            
-            if ($resultado) {
-                setMensaje('success', 'Función actualizada correctamente.');
-            } else {
-                setMensaje('error', 'Error al actualizar la función.');
-            }
-            
+            setMensaje($resultado ? 'success' : 'error', 
+                       $resultado ? 'Función actualizada.' : 'Error al actualizar.');
             redirigir('admin_funciones');
         }
         
         $peliculas = PeliculaModelo::obtenerTodas();
         $salas = SalaModelo::obtenerTodas();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/funciones/editar.php';
     }
     
     public function eliminarFuncion() {
         AuthControlador::verificarAdmin();
-        
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de función no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_funciones');
         }
-        
         $resultado = FuncionModelo::eliminar($id);
-        
-        if ($resultado) {
-            setMensaje('success', 'Función eliminada correctamente.');
-        } else {
-            setMensaje('error', 'Error al eliminar la función.');
-        }
-        
+        setMensaje($resultado ? 'success' : 'error', 
+                   $resultado ? 'Función eliminada.' : 'Error al eliminar.');
         redirigir('admin_funciones');
     }
     
@@ -273,10 +229,8 @@ class AdminControlador {
     
     public function listarSalas() {
         AuthControlador::verificarAdmin();
-        
         $salas = SalaModelo::obtenerTodas();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/salas/listar.php';
     }
     
@@ -287,22 +241,24 @@ class AdminControlador {
             $nombre = sanitizar($_POST['nombre'] ?? '');
             $capacidad = intval($_POST['capacidad'] ?? 0);
             
-            if (empty($nombre) || $capacidad <= 0) {
-                setMensaje('error', 'Todos los campos son obligatorios.');
+            $capacidades_validas = array_keys(capacidadesPermitidas());
+            
+            if (empty($nombre) || !in_array($capacidad, $capacidades_validas)) {
+                setMensaje('error', 'Datos inválidos. Elegí una capacidad permitida.');
                 redirigir('admin_salas_agregar');
             }
             
-            $resultado = SalaModelo::crear($nombre, $capacidad);
-            
-            if ($resultado) {
-                setMensaje('success', 'Sala agregada correctamente.');
-            } else {
-                setMensaje('error', 'Error al agregar la sala.');
+            try {
+                $resultado = SalaModelo::crear($nombre, $capacidad);
+                setMensaje($resultado ? 'success' : 'error', 
+                           $resultado ? 'Sala agregada correctamente.' : 'Error al agregar.');
+            } catch (Exception $e) {
+                setMensaje('error', $e->getMessage());
             }
-            
             redirigir('admin_salas');
         }
         
+        $capacidades = capacidadesPermitidas();
         $mensaje = getMensaje();
         require_once __DIR__ . '/../views/admin/salas/agregar.php';
     }
@@ -310,10 +266,9 @@ class AdminControlador {
     public function editarSala() {
         AuthControlador::verificarAdmin();
         
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de sala no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_salas');
         }
         
@@ -327,44 +282,38 @@ class AdminControlador {
             $nombre = sanitizar($_POST['nombre'] ?? '');
             $capacidad = intval($_POST['capacidad'] ?? 0);
             
-            if (empty($nombre) || $capacidad <= 0) {
-                setMensaje('error', 'Todos los campos son obligatorios.');
+            $capacidades_validas = array_keys(capacidadesPermitidas());
+            
+            if (empty($nombre) || !in_array($capacidad, $capacidades_validas)) {
+                setMensaje('error', 'Datos inválidos.');
                 redirigir('admin_salas_editar&id=' . $id);
             }
             
-            $resultado = SalaModelo::actualizar($id, $nombre, $capacidad);
-            
-            if ($resultado) {
-                setMensaje('success', 'Sala actualizada correctamente.');
-            } else {
-                setMensaje('error', 'Error al actualizar la sala.');
+            try {
+                $resultado = SalaModelo::actualizar($id, $nombre, $capacidad);
+                setMensaje($resultado ? 'success' : 'error', 
+                           $resultado ? 'Sala actualizada.' : 'Error al actualizar.');
+            } catch (Exception $e) {
+                setMensaje('error', $e->getMessage());
             }
-            
             redirigir('admin_salas');
         }
         
+        $capacidades = capacidadesPermitidas();
         $mensaje = getMensaje();
         require_once __DIR__ . '/../views/admin/salas/editar.php';
     }
     
     public function eliminarSala() {
         AuthControlador::verificarAdmin();
-        
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de sala no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_salas');
         }
-        
         $resultado = SalaModelo::eliminar($id);
-        
-        if ($resultado) {
-            setMensaje('success', 'Sala eliminada correctamente.');
-        } else {
-            setMensaje('error', 'Error al eliminar la sala.');
-        }
-        
+        setMensaje($resultado ? 'success' : 'error', 
+                   $resultado ? 'Sala eliminada.' : 'Error al eliminar.');
         redirigir('admin_salas');
     }
     
@@ -372,63 +321,45 @@ class AdminControlador {
     
     public function listarUsuarios() {
         AuthControlador::verificarAdmin();
-        
         $usuarios = UsuarioModelo::obtenerTodos();
         $mensaje = getMensaje();
-        
         require_once __DIR__ . '/../views/admin/usuarios/listar.php';
     }
     
     public function cambiarRol() {
         AuthControlador::verificarAdmin();
-        
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $rol = isset($_GET['rol']) ? $_GET['rol'] : '';
+        $id = intval($_GET['id'] ?? 0);
+        $rol = $_GET['rol'] ?? '';
         
         if ($id <= 0 || !in_array($rol, ['usuario', 'admin'])) {
             setMensaje('error', 'Datos no válidos.');
             redirigir('admin_usuarios');
         }
-        
         if ($id == $_SESSION['usuario_id']) {
             setMensaje('error', 'No puedes cambiar tu propio rol.');
             redirigir('admin_usuarios');
         }
         
         $resultado = UsuarioModelo::actualizarRol($id, $rol);
-        
-        if ($resultado) {
-            setMensaje('success', 'Rol del usuario actualizado correctamente.');
-        } else {
-            setMensaje('error', 'Error al actualizar el rol.');
-        }
-        
+        setMensaje($resultado ? 'success' : 'error', 
+                   $resultado ? 'Rol actualizado.' : 'Error al actualizar rol.');
         redirigir('admin_usuarios');
     }
     
     public function eliminarUsuario() {
         AuthControlador::verificarAdmin();
-        
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        
+        $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de usuario no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_usuarios');
         }
-        
         if ($id == $_SESSION['usuario_id']) {
             setMensaje('error', 'No puedes eliminar tu propia cuenta.');
             redirigir('admin_usuarios');
         }
-        
         $resultado = UsuarioModelo::eliminar($id);
-        
-        if ($resultado) {
-            setMensaje('success', 'Usuario eliminado correctamente.');
-        } else {
-            setMensaje('error', 'Error al eliminar el usuario.');
-        }
-        
+        setMensaje($resultado ? 'success' : 'error', 
+                   $resultado ? 'Usuario eliminado.' : 'Error al eliminar.');
         redirigir('admin_usuarios');
     }
     
@@ -471,7 +402,6 @@ class AdminControlador {
         $filtro = $_GET['estado'] ?? null;
         $comentarios = ComentarioModelo::obtenerTodos($filtro);
         $mensaje = getMensaje();
-
         require_once __DIR__ . '/../views/admin/comentarios/moderar.php';
     }
 
@@ -479,26 +409,22 @@ class AdminControlador {
 
     public function listarTemas() {
         AuthControlador::verificarAdmin();
-
         $temas = TemaModelo::obtenerTodos();
         $tema_activo = TemaModelo::obtenerActivo();
         $mensaje = getMensaje();
-
         require_once __DIR__ . '/../views/admin/temas/listar.php';
     }
 
     public function activarTema() {
         AuthControlador::verificarAdmin();
-
         $id = intval($_POST['id'] ?? 0);
         if ($id <= 0) {
             setMensaje('error', 'ID de tema no válido.');
             redirigir('admin_temas');
         }
-
         $ok = TemaModelo::activar($id);
         setMensaje($ok ? 'success' : 'error', 
-                   $ok ? 'Tema activado correctamente.' : 'Error al activar el tema.');
+                   $ok ? 'Tema activado correctamente.' : 'Error al activar.');
         redirigir('admin_temas');
     }
 
@@ -523,7 +449,7 @@ class AdminControlador {
 
             $ok = TemaModelo::crear($datos);
             setMensaje($ok ? 'success' : 'error', 
-                       $ok ? 'Tema creado correctamente.' : 'Error al crear el tema.');
+                       $ok ? 'Tema creado.' : 'Error al crear.');
             redirigir('admin_temas');
         }
 
@@ -536,7 +462,7 @@ class AdminControlador {
 
         $id = intval($_GET['id'] ?? 0);
         if ($id <= 0) {
-            setMensaje('error', 'ID de tema no válido.');
+            setMensaje('error', 'ID no válido.');
             redirigir('admin_temas');
         }
 
@@ -564,7 +490,7 @@ class AdminControlador {
 
             $ok = TemaModelo::actualizar($id, $datos);
             setMensaje($ok ? 'success' : 'error', 
-                       $ok ? 'Tema actualizado correctamente.' : 'Error al actualizar.');
+                       $ok ? 'Tema actualizado.' : 'Error al actualizar.');
             redirigir('admin_temas');
         }
 
@@ -583,13 +509,13 @@ class AdminControlador {
 
         $tema_activo = TemaModelo::obtenerActivo();
         if ($tema_activo && $tema_activo['id_tema'] == $id) {
-            setMensaje('error', 'No podés eliminar el tema que está activo. Cambiá a otro primero.');
+            setMensaje('error', 'No podés eliminar el tema activo. Cambiá a otro primero.');
             redirigir('admin_temas');
         }
 
         $ok = TemaModelo::eliminar($id);
         setMensaje($ok ? 'success' : 'error', 
-                   $ok ? 'Tema eliminado.' : 'No se puede eliminar (es predeterminado o no existe).');
+                   $ok ? 'Tema eliminado.' : 'No se puede eliminar.');
         redirigir('admin_temas');
     }
 }

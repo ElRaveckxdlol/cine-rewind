@@ -36,7 +36,8 @@ class UsuarioControlador {
         
         $decada = isset($_GET['decada']) ? intval($_GET['decada']) : 0;
         
-        if ($decada < 1950 || $decada > 2030) {
+        // Validar rango amplio (1900 a 2030)
+        if ($decada < 1900 || $decada > 2030) {
             setMensaje('error', 'Década no válida.');
             redirigir('cartelera');
         }
@@ -156,7 +157,7 @@ class UsuarioControlador {
     }
     
     /**
-     * Selección de butacas (ahora muestra TODAS con su estado)
+     * Selección de butacas
      */
     public function entrada() {
         AuthControlador::verificarAutenticacion();

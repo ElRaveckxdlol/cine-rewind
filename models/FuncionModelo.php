@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/ConexionBD.php';
 require_once __DIR__ . '/SalaModelo.php';
+require_once __DIR__ . '/../helpers/funciones.php';
 
 class FuncionModelo {
     
@@ -75,12 +76,11 @@ class FuncionModelo {
     }
     
     /**
-     * Crea una nueva función
+     * Crea una nueva función con sus butacas
      */
     public static function crear($datos) {
         $db = ConexionBD::getInstancia()->getConexion();
         
-        // Iniciar transacción
         $db->beginTransaction();
         
         try {
@@ -99,17 +99,31 @@ class FuncionModelo {
             if ($resultado) {
                 $id_funcion = $db->lastInsertId();
                 
-                // Generar butacas para esta función
+                // Obtener la sala
                 $sala = SalaModelo::obtenerPorId($datos['id_sala']);
-                $capacidad = $sala['capacidad'];
+                if (!$sala) {
+                    throw new Exception("Sala no encontrada.");
+                }
                 
-                for ($i = 1; $i <= $capacidad; $i++) {
-                    $fila = chr(65 + (($i - 1) / 10));
-                    $asiento = str_pad((($i - 1) % 10) + 1, 2, '0', STR_PAD_LEFT);
-                    $numero = "Fila " . $fila . " - Asiento " . $asiento;
-                    
-                    $stmtButaca = $db->prepare("INSERT INTO butacas (id_funcion, numero_butaca) VALUES (?, ?)");
-                    $stmtButaca->execute([$id_funcion, $numero]);
+                $capacidad = intval($sala['capacidad']);
+                
+                // Obtener layout según capacidad
+                $layouts = capacidadesPermitidas();
+                if (!isset($layouts[$capacidad])) {
+                    throw new Exception("Capacidad de sala no válida: $capacidad");
+                }
+                
+                $filas = $layouts[$capacidad]['filas'];
+                $columnas = $layouts[$capacidad]['columnas'];
+                
+                // Generar butacas con código alfanumérico (A-01, A-02, ...)
+                $stmtButaca = $db->prepare("INSERT INTO butacas (id_funcion, numero_butaca) VALUES (?, ?)");
+                
+                for ($f = 0; $f < $filas; $f++) {
+                    for ($c = 0; $c < $columnas; $c++) {
+                        $codigo = generarCodigoButaca($f, $c);
+                        $stmtButaca->execute([$id_funcion, $codigo]);
+                    }
                 }
             }
             

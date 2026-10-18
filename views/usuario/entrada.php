@@ -38,21 +38,31 @@
             <input type="hidden" name="id_funcion" value="<?php echo $funcion['id_funcion']; ?>">
 
             <div class="butacas-grid">
-                <?php foreach ($butacas as $butaca): ?>
-                    <?php
-                        $estado = $butaca['estado'];
-                        $disabled = ($estado !== 'disponible') ? 'disabled' : '';
-                    ?>
-                    <label class="butaca-label <?php echo $estado; ?>">
-                        <input type="checkbox" 
-                               name="butacas[]" 
-                               value="<?php echo $butaca['id_butaca']; ?>"
-                               class="butaca-checkbox"
-                               <?php echo $disabled; ?>>
-                        <span class="butaca-num">
-                            <?php echo e($butaca['numero_butaca']); ?>
-                        </span>
-                    </label>
+                <?php 
+                $butacas_por_fila = ButacaModelo::agruparPorFila($butacas);
+                foreach ($butacas_por_fila as $fila => $butacas_fila): 
+                ?>
+                    <div class="butaca-fila">
+                        <span class="fila-label">Fila <?php echo $fila; ?></span>
+                        <div class="fila-butacas">
+                            <?php foreach ($butacas_fila as $butaca): ?>
+                                <?php
+                                    $estado = $butaca['estado'];
+                                    $disabled = ($estado !== 'disponible') ? 'disabled' : '';
+                                ?>
+                                <label class="butaca-label <?php echo $estado; ?>">
+                                    <input type="checkbox" 
+                                           name="butacas[]" 
+                                           value="<?php echo $butaca['id_butaca']; ?>"
+                                           class="butaca-checkbox"
+                                           <?php echo $disabled; ?>>
+                                    <span class="butaca-num">
+                                        <?php echo e($butaca['numero_butaca']); ?>
+                                    </span>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
 

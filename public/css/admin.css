@@ -158,10 +158,42 @@
 /* ========== BUTACAS ========== */
 .butacas-grid {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    gap: 5px;
     justify-content: center;
     margin-top: 20px;
+    align-items: center;
+}
+
+.butaca-fila {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 900px;
+}
+
+.fila-label {
+    display: inline-block;
+    min-width: 60px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--color-primario);
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+.fila-butacas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .butaca-form {
@@ -249,15 +281,16 @@
 
 .butaca-label .butaca-num {
     display: inline-block;
-    padding: 10px 12px;
+    padding: 10px 8px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     color: white;
-    min-width: 80px;
+    min-width: 55px;
     text-align: center;
     transition: 0.2s;
     border: 2px solid transparent;
+    font-family: 'Courier New', monospace;
 }
 
 .butaca-label.disponible .butaca-num { background-color: #28a745; }

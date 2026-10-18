@@ -27,7 +27,6 @@ class ButacaModelo {
     
     /**
      * Obtiene TODAS las butacas de una función con su estado
-     * (para mostrar el mapa completo)
      */
     public static function obtenerTodasPorFuncion($id_funcion) {
         $db = ConexionBD::getInstancia()->getConexion();
@@ -36,6 +35,24 @@ class ButacaModelo {
                               ORDER BY id_butaca ASC");
         $stmt->execute([$id_funcion]);
         return $stmt->fetchAll();
+    }
+    
+    /**
+     * Agrupa las butacas por fila (A, B, C...)
+     * Devuelve: ['A' => [...butacas...], 'B' => [...butacas...], ...]
+     */
+    public static function agruparPorFila($butacas) {
+        $agrupadas = [];
+        foreach ($butacas as $butaca) {
+            // El numero_butaca es "A-01", "B-07", etc.
+            $fila = substr($butaca['numero_butaca'], 0, 1);
+            if (!isset($agrupadas[$fila])) {
+                $agrupadas[$fila] = [];
+            }
+            $agrupadas[$fila][] = $butaca;
+        }
+        ksort($agrupadas);
+        return $agrupadas;
     }
     
     /**

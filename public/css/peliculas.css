@@ -217,11 +217,6 @@
     margin-top: 8px;
 }
 
-.carrusel-info .btn-reservar {
-    display: inline-block;
-    margin-top: 12px;
-}
-
 .carrusel-btn {
     position: absolute;
     top: 50%;
@@ -275,6 +270,57 @@
 
 .carrusel-indicadores .dot:hover {
     background: var(--color-acento);
+}
+
+/* ========== BOTONES DEL CARRUSEL (mismo tamaño) ========== */
+.carrusel-info .pelicula-botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.carrusel-info .btn-detalle,
+.carrusel-info .btn-reservar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 130px;
+    height: 42px;
+    box-sizing: border-box;
+    transition: 0.3s;
+    text-decoration: none;
+    border: 2px solid transparent;
+}
+
+.carrusel-info .btn-detalle {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+}
+
+.carrusel-info .btn-detalle:hover {
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    transform: scale(1.05);
+}
+
+.carrusel-info .btn-reservar {
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    border: 2px solid var(--color-acento);
+    margin-top: 0;
+}
+
+.carrusel-info .btn-reservar:hover {
+    background-color: var(--color-acento-hover);
+    border-color: var(--color-acento-hover);
+    transform: scale(1.05);
 }
 
 /* ========== BARRA SUPERIOR (décadas) ========== */

@@ -27,8 +27,17 @@
             </div>
 
             <div class="input-group">
-                <label for="capacidad">Capacidad</label>
-                <input type="number" id="capacidad" name="capacidad" required min="1">
+                <label for="capacidad">Capacidad (butacas)</label>
+                <select id="capacidad" name="capacidad" required>
+                    <option value="">— Elegir capacidad —</option>
+                    <?php foreach ($capacidades as $cap => $layout): ?>
+                        <option value="<?php echo $cap; ?>">
+                            <?php echo $cap; ?> butacas 
+                            (<?php echo $layout['filas']; ?> filas × <?php echo $layout['columnas']; ?> asientos)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <small>Las butacas se generarán automáticamente con código A-01, A-02, etc.</small>
             </div>
 
             <button type="submit" class="btn-login">Agregar Sala</button>

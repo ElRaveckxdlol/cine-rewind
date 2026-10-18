@@ -13,7 +13,6 @@ function sanitizar($dato) {
 
 /**
  * Escapa un string para mostrar en HTML (al MOSTRAR)
- * Uso: <?php echo e($variable); ?>
  */
 function e($str) {
     return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
@@ -30,7 +29,6 @@ function validarEmail($email) {
  * Redirige a una URL
  */
 function redirigir($url) {
-    // Si la URL ya tiene index.php, no agregar nada extra
     if (strpos($url, 'index.php') === 0) {
         header('Location: ' . BASE_URL . $url);
     } else {
@@ -44,7 +42,7 @@ function redirigir($url) {
  */
 function setMensaje($tipo, $texto) {
     $_SESSION['mensaje'] = [
-        'tipo' => $tipo, // 'success', 'error', 'warning', 'info'
+        'tipo' => $tipo,
         'texto' => $texto
     ];
 }
@@ -127,7 +125,6 @@ function csrf_token() {
 
 /**
  * CSRF - Campo oculto para formularios
- * Uso: <?php echo csrf_field(); ?>
  */
 function csrf_field() {
     return '<input type="hidden" name="csrf_token" value="' . csrf_token() . '">';
@@ -135,20 +132,42 @@ function csrf_field() {
 
 /**
  * CSRF - Verifica el token en POST
- * Llamar al inicio del index.php o en cada controlador que reciba POST
  */
 function csrf_verificar() {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         return true;
     }
-
     $enviado = $_POST['csrf_token'] ?? '';
     $guardado = $_SESSION['csrf_token'] ?? '';
-
     if (empty($guardado) || !hash_equals($guardado, $enviado)) {
         http_response_code(403);
         die('Token de seguridad inválido. Volvé atrás e intentá de nuevo.');
     }
     return true;
+}
+
+/**
+ * Devuelve las capacidades permitidas para salas
+ * Formato: [capacidad => ['filas' => X, 'columnas' => Y]]
+ */
+function capacidadesPermitidas() {
+    return [
+        50  => ['filas' => 5,  'columnas' => 10],
+        60  => ['filas' => 6,  'columnas' => 10],
+        80  => ['filas' => 8,  'columnas' => 10],
+        100 => ['filas' => 10, 'columnas' => 10],
+        120 => ['filas' => 12, 'columnas' => 10],
+    ];
+}
+
+/**
+ * Genera el código alfanumérico de una butaca: "A-01", "B-07", etc.
+ * @param int $fila    Índice de fila (0 = A, 1 = B, ...)
+ * @param int $columna Índice de columna (0 = 01, 1 = 02, ...)
+ */
+function generarCodigoButaca($fila, $columna) {
+    $letra = chr(65 + $fila);
+    $numero = str_pad($columna + 1, 2, '0', STR_PAD_LEFT);
+    return $letra . '-' . $numero;
 }
 ?>

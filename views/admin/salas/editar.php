@@ -27,8 +27,17 @@
             </div>
 
             <div class="input-group">
-                <label for="capacidad">Capacidad</label>
-                <input type="number" id="capacidad" name="capacidad" value="<?php echo $sala['capacidad']; ?>" required min="1">
+                <label for="capacidad">Capacidad (butacas)</label>
+                <select id="capacidad" name="capacidad" required>
+                    <option value="">— Elegir capacidad —</option>
+                    <?php foreach ($capacidades as $cap => $layout): ?>
+                        <option value="<?php echo $cap; ?>" <?php echo $sala['capacidad'] == $cap ? 'selected' : ''; ?>>
+                            <?php echo $cap; ?> butacas 
+                            (<?php echo $layout['filas']; ?> filas × <?php echo $layout['columnas']; ?> asientos)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <small>Si cambiás la capacidad, las funciones existentes mantendrán sus butacas actuales.</small>
             </div>
 
             <button type="submit" class="btn-login">Actualizar Sala</button>

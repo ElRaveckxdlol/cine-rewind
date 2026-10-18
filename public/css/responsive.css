@@ -7,27 +7,24 @@
     .navbar {
         height: auto;
         padding: 15px 5%;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 10px;
-    }
-
-    .navbar ul {
-        gap: 15px;
-    }
-
-    .navbar h1 {
-        font-size: 24px;
     }
 
     .nav-menu {
         order: 3;
         width: 100%;
-        gap: 12px;
+        gap: 15px;
         justify-content: center;
     }
 
     .nav-right {
         order: 2;
+        margin-left: auto;
+    }
+
+    .navbar h1 {
+        font-size: 22px;
     }
 
     .carrusel {
@@ -57,32 +54,29 @@
 /* ========== MÓVILES (≤768px) ========== */
 @media (max-width: 768px) {
     body {
-        padding-top: 100px;
+        padding-top: 90px;
     }
 
     .navbar {
         height: auto;
         padding: 10px 4%;
+        gap: 10px;
     }
 
     .navbar h1 {
         font-size: 20px;
     }
 
-    .navbar ul {
+    .nav-menu {
         gap: 10px;
     }
 
-    .navbar ul li a {
+    .nav-menu li a {
         font-size: 14px;
     }
 
-    .button {
-        padding: 6px 14px;
-    }
-
-    .button a p {
-        font-size: 14px;
+    .nav-right {
+        gap: 10px;
     }
 
     .nav-search-input {
@@ -100,6 +94,13 @@
 
     .user-dropdown-btn {
         padding: 6px;
+        height: 36px;
+        width: 36px;
+        justify-content: center;
+    }
+
+    .user-caret {
+        display: none;
     }
 
     .user-dropdown-menu {
@@ -115,6 +116,8 @@
     .pelicula-botones .btn-reservar {
         font-size: 11px;
         padding: 6px 10px;
+        height: 32px;
+        min-width: 85px;
     }
 
     .login-container,
@@ -253,6 +256,23 @@
         min-width: 60px;
     }
 
+    /* Filas de butacas en mobile */
+    .butaca-fila {
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+    }
+
+    .fila-label {
+        text-align: center;
+        min-width: auto;
+        font-size: 12px;
+    }
+
+    .fila-butacas {
+        gap: 5px;
+    }
+
     .contenedor-nosotros {
         margin: 10px;
         padding: 20px;
@@ -269,24 +289,47 @@
 
 /* ========== MÓVILES PEQUEÑOS (≤480px) ========== */
 @media (max-width: 480px) {
-    .navbar ul {
+    body {
+        padding-top: 85px;
+    }
+
+    .navbar {
+        padding: 8px 3%;
+    }
+
+    .nav-menu {
         gap: 8px;
     }
 
-    .navbar ul li a {
+    .nav-menu li a {
         font-size: 12px;
     }
 
     .navbar h1 {
-        font-size: 18px;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    .nav-search {
+        height: 34px;
     }
 
     .nav-search-input {
-        width: 90px;
+        width: 80px;
+        font-size: 12px;
+        padding: 6px 12px 6px 0;
     }
 
-    .nav-menu li a {
-        font-size: 13px;
+    .user-dropdown-btn {
+        height: 34px;
+        width: 34px;
+        padding: 4px;
+    }
+
+    .user-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
     }
 
     .carrusel {
@@ -331,9 +374,23 @@
     .btn-detalle,
     .pelicula-botones .btn-reservar {
         width: 100%;
+        height: auto;
         text-align: center;
         font-size: 11px;
         padding: 6px 8px;
+    }
+
+    /* Filas de butacas en mobile chico */
+    .butaca-fila {
+        padding: 4px;
+    }
+
+    .fila-label {
+        font-size: 11px;
+    }
+
+    .fila-butacas {
+        gap: 4px;
     }
 
     .stats-grid {
