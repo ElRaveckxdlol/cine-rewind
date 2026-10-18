@@ -1,0 +1,359 @@
+/* ========================================
+   RESPONSIVE - Adaptaciones para mobile/tablet
+   ======================================== */
+
+/* ========== TABLETS Y PANTALLAS MEDIANAS (≤992px) ========== */
+@media (max-width: 992px) {
+    .navbar {
+        height: auto;
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar ul {
+        gap: 15px;
+    }
+
+    .navbar h1 {
+        font-size: 24px;
+    }
+
+    .nav-menu {
+        order: 3;
+        width: 100%;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .nav-right {
+        order: 2;
+    }
+
+    .carrusel {
+        height: 350px;
+        width: 95%;
+    }
+
+    .carrusel-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .carrusel-info {
+        left: 30px;
+        bottom: 30px;
+        max-width: 70%;
+    }
+
+    .cinedeoro-section h2 {
+        font-size: 2.2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========== MÓVILES (≤768px) ========== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .navbar {
+        height: auto;
+        padding: 10px 4%;
+    }
+
+    .navbar h1 {
+        font-size: 20px;
+    }
+
+    .navbar ul {
+        gap: 10px;
+    }
+
+    .navbar ul li a {
+        font-size: 14px;
+    }
+
+    .button {
+        padding: 6px 14px;
+    }
+
+    .button a p {
+        font-size: 14px;
+    }
+
+    .nav-search-input {
+        width: 110px;
+        font-size: 13px;
+    }
+
+    .nav-search-btn span {
+        display: none;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .user-dropdown-btn {
+        padding: 6px;
+    }
+
+    .user-dropdown-menu {
+        right: -10px;
+        min-width: 220px;
+    }
+
+    .pelicula-botones {
+        gap: 6px;
+    }
+
+    .btn-detalle,
+    .pelicula-botones .btn-reservar {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    .login-container,
+    .register-container,
+    .perfil-container,
+    .historial-container,
+    .entrada-container,
+    .reservar-container,
+    .contacto-container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .carrusel {
+        height: 280px;
+        width: 100%;
+        border-radius: 0;
+        margin: 20px 0;
+    }
+
+    .carrusel-info {
+        left: 15px;
+        bottom: 20px;
+        max-width: 85%;
+    }
+
+    .carrusel-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .carrusel-info p {
+        font-size: 0.85rem;
+    }
+
+    .carrusel-btn {
+        padding: 10px 14px;
+        font-size: 18px;
+    }
+
+    .carrusel-indicadores .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .cinedeoro-section {
+        padding: 30px 15px;
+        margin: 10px;
+    }
+
+    .cinedeoro-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .cinedeoro-texto {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+
+    .movie-card {
+        width: 180px;
+    }
+
+    .movie-card img {
+        height: 250px;
+    }
+
+    .pelicula {
+        width: 170px;
+    }
+
+    .pelicula img {
+        height: 230px;
+    }
+
+    .conteiner-peliculas {
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .barra-superior h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn-g {
+        font-size: 12px;
+        padding: 5px 10px;
+        margin-right: 5px;
+    }
+
+    .admin-dashboard,
+    .admin-section,
+    .admin-form {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .admin-section table {
+        font-size: 12px;
+    }
+
+    .admin-section th,
+    .admin-section td {
+        padding: 6px 8px;
+    }
+
+    .historial-table table {
+        font-size: 12px;
+    }
+
+    .historial-table th,
+    .historial-table td {
+        padding: 6px 8px;
+    }
+
+    .funcion-card {
+        min-width: 150px;
+        padding: 12px;
+    }
+
+    .butaca-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+        min-width: 60px;
+    }
+
+    .contenedor-nosotros {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .contenedor-nosotros h1 {
+        font-size: 2rem;
+    }
+
+    .contenedor-nosotros h2 {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== MÓVILES PEQUEÑOS (≤480px) ========== */
+@media (max-width: 480px) {
+    .navbar ul {
+        gap: 8px;
+    }
+
+    .navbar ul li a {
+        font-size: 12px;
+    }
+
+    .navbar h1 {
+        font-size: 18px;
+    }
+
+    .nav-search-input {
+        width: 90px;
+    }
+
+    .nav-menu li a {
+        font-size: 13px;
+    }
+
+    .carrusel {
+        height: 220px;
+    }
+
+    .carrusel-info h2 {
+        font-size: 1rem;
+    }
+
+    .carrusel-info p {
+        font-size: 0.75rem;
+        display: none;
+    }
+
+    .carrusel-btn {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .pelicula {
+        width: 150px;
+    }
+
+    .pelicula img {
+        height: 200px;
+    }
+
+    .movie-card {
+        width: 150px;
+    }
+
+    .movie-card img {
+        height: 210px;
+    }
+
+    .pelicula-botones {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-detalle,
+    .pelicula-botones .btn-reservar {
+        width: 100%;
+        text-align: center;
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-section table {
+        font-size: 11px;
+    }
+
+    .admin-section th,
+    .admin-section td {
+        padding: 4px 6px;
+    }
+
+    .btn-edit,
+    .btn-delete,
+    .btn-approve,
+    .btn-reject {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}

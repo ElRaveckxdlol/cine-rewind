@@ -5,6 +5,7 @@ require_once __DIR__ . '/../models/FuncionModelo.php';
 require_once __DIR__ . '/../models/UsuarioModelo.php';
 require_once __DIR__ . '/../models/ReservaModelo.php';
 require_once __DIR__ . '/../models/ComentarioModelo.php';
+require_once __DIR__ . '/../models/TemaModelo.php';
 require_once __DIR__ . '/../helpers/funciones.php';
 require_once __DIR__ . '/../helpers/session.php';
 require_once __DIR__ . '/AuthControlador.php';
@@ -472,6 +473,124 @@ class AdminControlador {
         $mensaje = getMensaje();
 
         require_once __DIR__ . '/../views/admin/comentarios/moderar.php';
+    }
+
+    // ==================== TEMAS ====================
+
+    public function listarTemas() {
+        AuthControlador::verificarAdmin();
+
+        $temas = TemaModelo::obtenerTodos();
+        $tema_activo = TemaModelo::obtenerActivo();
+        $mensaje = getMensaje();
+
+        require_once __DIR__ . '/../views/admin/temas/listar.php';
+    }
+
+    public function activarTema() {
+        AuthControlador::verificarAdmin();
+
+        $id = intval($_POST['id'] ?? 0);
+        if ($id <= 0) {
+            setMensaje('error', 'ID de tema no válido.');
+            redirigir('admin_temas');
+        }
+
+        $ok = TemaModelo::activar($id);
+        setMensaje($ok ? 'success' : 'error', 
+                   $ok ? 'Tema activado correctamente.' : 'Error al activar el tema.');
+        redirigir('admin_temas');
+    }
+
+    public function agregarTema() {
+        AuthControlador::verificarAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $datos = [
+                'nombre'             => sanitizar($_POST['nombre'] ?? ''),
+                'color_fondo'        => sanitizar($_POST['color_fondo'] ?? '#000000'),
+                'color_primario'     => sanitizar($_POST['color_primario'] ?? '#000000'),
+                'color_acento'       => sanitizar($_POST['color_acento'] ?? '#000000'),
+                'color_acento_hover' => sanitizar($_POST['color_acento_hover'] ?? '#000000'),
+                'color_texto'        => sanitizar($_POST['color_texto'] ?? '#000000'),
+                'color_texto_claro'  => sanitizar($_POST['color_texto_claro'] ?? '#000000'),
+            ];
+
+            if (empty($datos['nombre'])) {
+                setMensaje('error', 'El nombre del tema es obligatorio.');
+                redirigir('admin_temas_agregar');
+            }
+
+            $ok = TemaModelo::crear($datos);
+            setMensaje($ok ? 'success' : 'error', 
+                       $ok ? 'Tema creado correctamente.' : 'Error al crear el tema.');
+            redirigir('admin_temas');
+        }
+
+        $mensaje = getMensaje();
+        require_once __DIR__ . '/../views/admin/temas/agregar.php';
+    }
+
+    public function editarTema() {
+        AuthControlador::verificarAdmin();
+
+        $id = intval($_GET['id'] ?? 0);
+        if ($id <= 0) {
+            setMensaje('error', 'ID de tema no válido.');
+            redirigir('admin_temas');
+        }
+
+        $tema = TemaModelo::obtenerPorId($id);
+        if (!$tema) {
+            setMensaje('error', 'Tema no encontrado.');
+            redirigir('admin_temas');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $datos = [
+                'nombre'             => sanitizar($_POST['nombre'] ?? ''),
+                'color_fondo'        => sanitizar($_POST['color_fondo'] ?? '#000000'),
+                'color_primario'     => sanitizar($_POST['color_primario'] ?? '#000000'),
+                'color_acento'       => sanitizar($_POST['color_acento'] ?? '#000000'),
+                'color_acento_hover' => sanitizar($_POST['color_acento_hover'] ?? '#000000'),
+                'color_texto'        => sanitizar($_POST['color_texto'] ?? '#000000'),
+                'color_texto_claro'  => sanitizar($_POST['color_texto_claro'] ?? '#000000'),
+            ];
+
+            if (empty($datos['nombre'])) {
+                setMensaje('error', 'El nombre del tema es obligatorio.');
+                redirigir('admin_temas_editar&id=' . $id);
+            }
+
+            $ok = TemaModelo::actualizar($id, $datos);
+            setMensaje($ok ? 'success' : 'error', 
+                       $ok ? 'Tema actualizado correctamente.' : 'Error al actualizar.');
+            redirigir('admin_temas');
+        }
+
+        $mensaje = getMensaje();
+        require_once __DIR__ . '/../views/admin/temas/editar.php';
+    }
+
+    public function eliminarTema() {
+        AuthControlador::verificarAdmin();
+
+        $id = intval($_GET['id'] ?? 0);
+        if ($id <= 0) {
+            setMensaje('error', 'ID no válido.');
+            redirigir('admin_temas');
+        }
+
+        $tema_activo = TemaModelo::obtenerActivo();
+        if ($tema_activo && $tema_activo['id_tema'] == $id) {
+            setMensaje('error', 'No podés eliminar el tema que está activo. Cambiá a otro primero.');
+            redirigir('admin_temas');
+        }
+
+        $ok = TemaModelo::eliminar($id);
+        setMensaje($ok ? 'success' : 'error', 
+                   $ok ? 'Tema eliminado.' : 'No se puede eliminar (es predeterminado o no existe).');
+        redirigir('admin_temas');
     }
 }
 ?>

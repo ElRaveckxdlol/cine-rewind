@@ -1,0 +1,33 @@
+/* ========================================
+   BASE - Variables, reset y tipografía
+   ======================================== */
+
+/* ========== VARIABLES DE TEMA ========== */
+:root {
+    --color-fondo: #e9bd96;
+    --color-primario: #1a1a1a;
+    --color-acento: #f5c518;
+    --color-acento-hover: #ffd700;
+    --color-texto: #333333;
+    --color-texto-claro: #ffffff;
+}
+
+/* ========== RESET Y BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-fondo);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 120px;
+}
+
+a {
+    text-decoration: none;
+}

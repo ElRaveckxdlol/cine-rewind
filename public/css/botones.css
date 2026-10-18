@@ -1,0 +1,217 @@
+/* ========================================
+   BOTONES - Todos los tipos de botones
+   ======================================== */
+
+/* ========== BOTONES GENERALES ========== */
+.btn-g {
+    background-color: rgb(252, 250, 250);
+    border: 2px solid var(--color-primario);
+    padding: 7px 13px;
+    cursor: pointer;
+    color: black;
+    margin-right: 10px;
+    gap: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.btn-g:hover {
+    background-color: var(--color-acento);
+    transform: scale(1.05);
+}
+
+.btn-g:active {
+    transform: scale(0.9);
+}
+
+.btn-reservar {
+    display: inline-block;
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-reservar:hover {
+    background-color: var(--color-acento-hover);
+    transform: scale(1.05);
+}
+
+.btn-login {
+    width: 100%;
+    background-color: var(--color-primario);
+    color: var(--color-texto-claro);
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #333;
+}
+
+.btn-reset {
+    width: 100%;
+    background-color: #ccc;
+    color: #333;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-reset:hover {
+    background-color: #bbb;
+}
+
+/* ========== BOTONES DE TARJETA DE PELÍCULA ========== */
+.btn-detalle {
+    display: inline-block;
+    background-color: #2a2a2a;
+    color: var(--color-acento);
+    padding: 8px 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid var(--color-acento);
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.btn-detalle:hover {
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    transform: scale(1.05);
+}
+
+.pelicula-botones .btn-reservar {
+    margin-top: 0;
+    font-size: 13px;
+    padding: 8px 14px;
+}
+
+/* ========== BOTONES DE ADMIN ========== */
+.btn-add {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+.btn-edit {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: 0.3s;
+    margin: 2px;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: 0.3s;
+    margin: 2px;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-approve {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: 0.3s;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-approve:hover {
+    background-color: #218838;
+}
+
+.btn-reject {
+    display: inline-block;
+    background-color: #ffc107;
+    color: var(--color-primario);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: 0.3s;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-reject:hover {
+    background-color: #e0a800;
+}
+
+.btn-warning {
+    display: inline-block;
+    background-color: #ffc107;
+    color: var(--color-primario);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: 0.3s;
+    margin: 2px;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-cancel {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+}

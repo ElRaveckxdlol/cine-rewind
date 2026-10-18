@@ -1,0 +1,480 @@
+/* ========================================
+   PELÍCULAS - Tarjetas, carrusel, décadas, detalle
+   ======================================== */
+
+/* ========== TÍTULO DE PÁGINA ========== */
+.page-title {
+    font-size: 2.5rem;
+    color: var(--color-primario);
+    margin: 30px 0 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== TARJETAS DE PELÍCULA ========== */
+.conteiner-peliculas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pelicula {
+    width: 220px;
+    background-color: var(--color-primario);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.pelicula:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pelicula img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.info-pelicula {
+    padding: 15px;
+}
+
+.pelicula h3 {
+    color: var(--color-texto-claro);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.pelicula p {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.pelicula .anio {
+    display: block;
+    color: var(--color-acento);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.pelicula-botones {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* ========== DÉCADAS ========== */
+.cinedeoro-section {
+    background: var(--color-primario);
+    color: var(--color-texto-claro);
+    padding: 60px 40px;
+    text-align: center;
+    justify-content: center;
+    margin: 20px;
+    border-radius: 10px;
+    min-height: 60vh;
+}
+
+.cinedeoro-section h2 {
+    font-size: 3rem;
+    color: var(--color-acento);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.cinedeoro-texto {
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 50px;
+    color: #cfcfcf;
+    font-size: 1.1rem;
+}
+
+.no-peliculas {
+    font-size: 1.2rem;
+    color: #999;
+    padding: 40px 0;
+}
+
+.movies-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.movie-card {
+    background: #2a2a2a;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 250px;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding-bottom: 15px;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    color: var(--color-texto-claro);
+}
+
+.movie-card span {
+    display: block;
+    margin: 10px 0;
+    color: var(--color-acento);
+}
+
+.movie-card .btn-reservar {
+    margin: 5px 0 10px;
+    font-size: 14px;
+    padding: 6px 14px;
+}
+
+/* ========== CARRUSEL ========== */
+.carrusel {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 450px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.carrusel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carrusel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.carrusel-slide.active {
+    opacity: 1;
+}
+
+.carrusel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(55%);
+}
+
+.carrusel-info {
+    position: absolute;
+    bottom: 40px;
+    left: 50px;
+    max-width: 500px;
+    color: white;
+    text-align: left;
+}
+
+.carrusel-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carrusel-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.carrusel-info .anio {
+    display: inline-block;
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.carrusel-info .btn-reservar {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.carrusel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carrusel-btn.prev {
+    left: 15px;
+}
+
+.carrusel-btn.next {
+    right: 15px;
+}
+
+.carrusel-indicadores {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.carrusel-indicadores .dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.carrusel-indicadores .dot.active {
+    background: var(--color-acento);
+    transform: scale(1.2);
+}
+
+.carrusel-indicadores .dot:hover {
+    background: var(--color-acento);
+}
+
+/* ========== BARRA SUPERIOR (décadas) ========== */
+.barra-superior {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.barra-superior h1 {
+    font-size: 2rem;
+    color: var(--color-primario);
+    margin-bottom: 15px;
+}
+
+.barra-superior a {
+    display: inline-block;
+    margin: 5px;
+}
+
+/* ========== BÚSQUEDA ========== */
+.buscar-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* ========== DETALLE DE PELÍCULA ========== */
+.detalle-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.detalle-pelicula {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.detalle-poster {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.detalle-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+.detalle-meta {
+    color: #666;
+    font-size: 15px;
+    margin: 10px 0;
+}
+
+.puntaje-promedio {
+    font-size: 20px;
+    color: var(--color-acento);
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* ========== COMENTARIOS ========== */
+.comentarios-section {
+    border-top: 2px solid #eee;
+    padding-top: 30px;
+}
+
+.form-comentario {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.lista-comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comentario-card {
+    background: #f9f9f9;
+    border-left: 4px solid var(--color-acento);
+    padding: 15px 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.comentario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comentario-header .fecha {
+    color: #999;
+    font-size: 13px;
+}
+
+/* ========== RESERVAR (funciones) ========== */
+.funciones-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.funcion-card {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-width: 200px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.funcion-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.funcion-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.funcion-card .btn-reservar {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.no-funciones {
+    font-size: 1.1rem;
+    color: #666;
+    padding: 30px 0;
+}
+
+/* ========== NOSOTROS ========== */
+.contenedor-nosotros {
+    border: 3px solid var(--color-primario);
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: var(--color-acento);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.contenedor-nosotros h1 {
+    font-size: 2.5rem;
+    color: var(--color-primario);
+    margin-bottom: 20px;
+}
+
+.contenedor-nosotros h2 {
+    font-size: 1.3rem;
+    color: var(--color-primario);
+    font-weight: normal;
+    line-height: 1.8;
+}
+
+/* ========== CONTACTO ========== */
+.redes-sociales {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.redes-sociales p {
+    font-size: 1.2rem;
+    margin: 12px 0;
+    color: var(--color-texto);
+}
+
+.redes-sociales a {
+    color: var(--color-primario);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.redes-sociales a:hover {
+    color: var(--color-acento);
+}

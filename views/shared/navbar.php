@@ -1,12 +1,22 @@
 <?php
-// Navbar unificado con dropdown de usuario
-// Requiere: BASE_URL, SITE_NAME, estaLogueado(), esAdmin()
+// Navbar unificado con dropdown de usuario y tema dinámico
+require_once __DIR__ . '/../../models/TemaModelo.php';
+$tema_actual = TemaModelo::obtenerActivo();
 ?>
+<style>
+:root {
+    --color-fondo: <?php echo e($tema_actual['color_fondo'] ?? '#e9bd96'); ?>;
+    --color-primario: <?php echo e($tema_actual['color_primario'] ?? '#1a1a1a'); ?>;
+    --color-acento: <?php echo e($tema_actual['color_acento'] ?? '#f5c518'); ?>;
+    --color-acento-hover: <?php echo e($tema_actual['color_acento_hover'] ?? '#ffd700'); ?>;
+    --color-texto: <?php echo e($tema_actual['color_texto'] ?? '#333333'); ?>;
+    --color-texto-claro: <?php echo e($tema_actual['color_texto_claro'] ?? '#ffffff'); ?>;
+}
+</style>
 <header>
     <nav class="navbar">
         <h1><?php echo SITE_NAME; ?></h1>
 
-        <!-- Menú principal -->
         <ul class="nav-menu">
             <li><a href="<?php echo BASE_URL; ?>?ruta=home">Inicio</a></li>
             <li><a href="<?php echo BASE_URL; ?>?ruta=nosotros">Nosotros</a></li>
@@ -17,7 +27,6 @@
             <?php endif; ?>
         </ul>
 
-        <!-- Buscador + Dropdown usuario -->
         <div class="nav-right">
             <?php if (estaLogueado()): ?>
                 <form class="nav-search" method="GET" action="<?php echo BASE_URL; ?>">
@@ -34,7 +43,6 @@
             <?php endif; ?>
 
             <?php if (estaLogueado()): ?>
-                <!-- Dropdown usuario -->
                 <div class="user-dropdown" id="userDropdown">
                     <button type="button" 
                             class="user-dropdown-btn" 
@@ -87,6 +95,9 @@
                             <a href="<?php echo BASE_URL; ?>?ruta=admin_comentarios" class="dropdown-item">
                                 Comentarios
                             </a>
+                            <a href="<?php echo BASE_URL; ?>?ruta=admin_temas" class="dropdown-item">
+                                Temas
+                            </a>
                         <?php endif; ?>
 
                         <div class="dropdown-divider"></div>
@@ -116,7 +127,6 @@ function toggleDropdown(e) {
     btn.setAttribute('aria-expanded', abierto);
 }
 
-// Cerrar al hacer click fuera
 document.addEventListener('click', function(e) {
     const dropdown = document.getElementById('userDropdown');
     if (dropdown && !dropdown.contains(e.target)) {
@@ -126,7 +136,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Cerrar con Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const dropdown = document.getElementById('userDropdown');

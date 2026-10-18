@@ -1,31 +1,22 @@
 <?php
 // Front Controller - Punto de entrada único
 
-// Cargar configuración
 require_once __DIR__ . '/../config/config.php';
-
-// Cargar helpers (session.php ya hace session_start())
 require_once __DIR__ . '/../helpers/funciones.php';
 require_once __DIR__ . '/../helpers/session.php';
 
-// Verificar CSRF en cada POST
 csrf_verificar();
 
-// Definir BASE_URL si no está
 if (!defined('BASE_URL')) {
     define('BASE_URL', '/cine-rewind/public/');
 }
 
-// Obtener la ruta solicitada
 $ruta = isset($_GET['ruta']) ? $_GET['ruta'] : 'home';
-
 if (empty($ruta)) {
     $ruta = 'home';
 }
 
-// Enrutamiento
 switch ($ruta) {
-
     // ==================== RUTAS PÚBLICAS ====================
     case 'login':
         require_once __DIR__ . '/../controladores/AuthControlador.php';
@@ -212,6 +203,32 @@ switch ($ruta) {
     case 'admin_comentarios':
         require_once __DIR__ . '/../controladores/AdminControlador.php';
         (new AdminControlador())->moderarComentarios();
+        break;
+
+    // ==================== TEMAS (ADMIN) ====================
+    case 'admin_temas':
+        require_once __DIR__ . '/../controladores/AdminControlador.php';
+        (new AdminControlador())->listarTemas();
+        break;
+
+    case 'admin_temas_activar':
+        require_once __DIR__ . '/../controladores/AdminControlador.php';
+        (new AdminControlador())->activarTema();
+        break;
+
+    case 'admin_temas_agregar':
+        require_once __DIR__ . '/../controladores/AdminControlador.php';
+        (new AdminControlador())->agregarTema();
+        break;
+
+    case 'admin_temas_editar':
+        require_once __DIR__ . '/../controladores/AdminControlador.php';
+        (new AdminControlador())->editarTema();
+        break;
+
+    case 'admin_temas_eliminar':
+        require_once __DIR__ . '/../controladores/AdminControlador.php';
+        (new AdminControlador())->eliminarTema();
         break;
 
     // ==================== 404 ====================
